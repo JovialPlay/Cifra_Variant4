@@ -74,7 +74,7 @@ while (!EndOfSession)
         case "Отправить":
             Console.Clear();
             Console.WriteLine("Отправка сообщения");
-            Thread.Sleep(2000);
+            Thread.Sleep(30000);
             Console.WriteLine("Сообщение отправлено");
             Console.WriteLine("Нажмите любую клавишу чтобы продолжить...");
             Console.ReadKey();
