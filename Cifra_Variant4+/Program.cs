@@ -21,7 +21,7 @@ if (!File.Exists(filepath))
                 Console.Clear();
                 Console.WriteLine("Введите путь к файлу");
                 newFilepath = Console.ReadLine();
-                try 
+                try
                 {
                     FileStream newFile = File.Create(newFilepath);
                     newFile.Close();
@@ -29,7 +29,7 @@ if (!File.Exists(filepath))
                     fileFound = true;
                 }
                 catch
-                { 
+                {
                     Console.WriteLine("Ошибка. Неправильно указан путь к файлу");
                     Console.WriteLine("Нажмите любую клавишу чтобы продолжить...");
                     Console.ReadKey();
@@ -40,14 +40,14 @@ if (!File.Exists(filepath))
                 Console.WriteLine("Введите путь к файлу");
                 newFilepath = Console.ReadLine();
                 if (newFilepath != null && File.Exists(newFilepath))
-                {                 
+                {
                     filepath = newFilepath;
                     fileFound = true;
                 }
                 break;
             case "Закрыть": //Если введено  3
                 return;
-            default: 
+            default:
                 Console.Clear();
                 break;
         }
@@ -76,8 +76,6 @@ while (!EndOfSession)
             Console.WriteLine("Отправка сообщения");
             Thread.Sleep(30000);
             Console.WriteLine("Сообщение отправлено");
-            Console.WriteLine("Нажмите любую клавишу чтобы продолжить...");
-            Console.ReadKey();
             break;
         default:
             try
@@ -86,6 +84,12 @@ while (!EndOfSession)
                 if (!int.TryParse(line, out lineNumber))
                 {
                     throw new Exception("Ошибка! Введенные данные не являются числом");
+                }
+                lineNumber--;
+
+                if (lineNumber < 0)
+                {
+                    throw new Exception("Ошибка! Номер строки меньше либо равен 0");
                 }
                 string? beforeChosenLine = "";
                 string? afterChosenLine = "";
@@ -97,22 +101,22 @@ while (!EndOfSession)
                 StreamReader reader = new StreamReader(file);
                 for (int i = 0; i < lineNumber; i++)
                 {
-                    beforeChosenLine += reader.ReadLine() +"\n";
+                    beforeChosenLine += reader.ReadLine() + "\n";
                     if (reader.EndOfStream)
                     {
                         reader.Close();
                         file.Close();
                         throw new ArgumentException("Ошибка ввода данных! Данная строка отсутствует");
                     }
-                }                 
+                }
 
                 currentLine = reader.ReadLine();
                 int equalPos = 0;
-                while (currentLine[equalPos] != '=') 
-                { 
+                while (currentLine[equalPos] != '=')
+                {
                     equalPos++;
                 }
-                currentLine = currentLine.Substring(0, equalPos+2);
+                currentLine = currentLine.Substring(0, equalPos + 2);
 
                 afterChosenLine = reader.ReadToEnd();
                 reader.Close();
